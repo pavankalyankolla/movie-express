@@ -37,6 +37,14 @@ app.get('/movies/:id',(req,res) => {
     }
 });
 
+app.post('/movies',(req,res) => {
+    let movie = new Movie(req.body);
+    movie.save()
+   if(movie) {
+        res.send ((movie, { msg : 'new movie created'}));
+   } 
+});
+
 
 app.listen(port,() => {
     console.log('listening to port',port);
