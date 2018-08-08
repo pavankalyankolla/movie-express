@@ -3,12 +3,20 @@ class Movie {
         this.id = params.id;
         this.name = params.name;
         this.info  = params.info;
-        this.Watched = params.Watched;
-        this.isRecommended = params.isRecommended;
+        this.watched = false;
+        this.isRecommended = false;
     }
 
-    save(){
-        Movie.data.push(this)
+    save(body){
+        if(body.watched == true && (body.isRecommended == true || body.isRecommended == false)){
+            this.watched = body.watched;
+            this.isRecommended = body.isRecommended;
+            Movie.data.push(this)
+        } else {
+            Movie.data.push(this)
+        }
+   
+        
     }
 
 
@@ -42,6 +50,32 @@ class Movie {
         }
         return index;
     }
+
+    static findWatched(){
+        let movie = Movie.data.filter((movie) => {
+            return movie.watched == true;
+        })
+        if(movie.length > 0){
+            return movie;
+        }
+    }
+    static findToWatch(){
+        let movie = Movie.data.filter((movie) => {
+            return movie.watched == true;
+        })
+        if(movie.length > 0){
+            return movie;
+        }
+    }
+
+    static findMyRecomm(){
+        let movie = Movie.data.filter((movie) => {
+            return movie.isRecommended == true;
+        })
+        if(movie.length > 0){
+            return movie;
+        }
+    }
 }
 Movie.data = [
     {
@@ -49,7 +83,7 @@ Movie.data = [
         name : "Atharintiki Daredi",
         info : "sentimental,comedy",
         images : "AD",
-        Watched : true,
+        watched : true,
         isRecommended : true
     },
     {
@@ -57,7 +91,7 @@ Movie.data = [
         name : "DJ",
         info : "Thriller,comedy",
         images : "DJ",
-        Watched : true,
+        watched : true,
         isRecommended : false
     }
 

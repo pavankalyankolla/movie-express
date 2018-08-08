@@ -39,7 +39,7 @@ app.get('/movies/:id',(req,res) => {
 
 app.post('/movies',(req,res) => {
     let movie = new Movie(req.body);
-    movie.save()
+    movie.save(req.body)
    if(movie) {
         res.send ((movie, { msg : 'new movie created'}));
    } 
@@ -66,6 +66,21 @@ app.delete('/movies/:id',(req,res) => {
     res.send({
         notice : 'sucessfully'
     })
+})
+
+app.get('/movies/watched',(req,res) => {
+    let movie = Movie.findWatched();
+    res.send(movie);
+})
+
+app.get('/movies/to_watch',(req,res) => {
+    let movie = Movie.findToWatch();
+    res.send(movie);
+})
+
+app.get('/movies/my_recommendation',(req,res) => {
+    let movie = Movie.findMyRecomm();
+    res.send(movie);
 })
 
 
