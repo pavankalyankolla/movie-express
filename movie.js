@@ -1,11 +1,25 @@
 class Movie {
-    constructor(){
+    constructor(params){
+        this.id = params.id;
+        this.name = params.name;
+        this.info  = params.info;
+        this.Watched = params.Watched;
+        this.isRecommended = params.isRecommended;
+    }
 
+    save(){
+        Movie.data.push(this)
     }
 
 
     static findAll(){
         return Movie.data;
+    }
+
+    static findOne(id){
+        return Movie.data.find((movie) => {
+            return movie.id == id
+        });
     }
 
 }

@@ -24,7 +24,18 @@ app.get('/',(req,res) => {
 app.get('/movies',(req,res) => {
     let movies = Movie.findAll();
     res.send(movies);
-})
+});
+
+app.get('/movies/:id',(req,res) => {
+    let movie = Movie.findOne(req.params.id);
+    if(movie) {
+        res.send(movie);
+    } else{
+        res.send({
+            msg : `movie with ${req.params.id} is not found`
+        });
+    }
+});
 
 
 app.listen(port,() => {
