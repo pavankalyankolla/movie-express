@@ -45,6 +45,30 @@ app.post('/movies',(req,res) => {
    } 
 });
 
+app.put('/movies/:id',(req,res) => {
+    let movie = Movie.findOneAndUpdate(req.params.id,req.body);
+    if(movie) {
+        res.send(movie);
+    } else{
+        res.send({
+            notice : 'movie record not found'
+        })
+    }
+});
+
+app.delete('/movies/:id',(req,res) => {
+    let index = Movie.findOneAndRemove(req.params.id);
+    if(index < 0){
+        res.send({
+            notice : 'movie not found'
+        })
+    } 
+    res.send({
+        notice : 'sucessfully'
+    })
+})
+
+
 
 app.listen(port,() => {
     console.log('listening to port',port);
